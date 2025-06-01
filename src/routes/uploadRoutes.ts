@@ -1,8 +1,10 @@
 import { Router } from 'express';
 import multer from 'multer';
 import path from 'path';
+import { UploadController } from '../controllers/UploadController';
 
 const router = Router();
+const uploadController = new UploadController();
 
 // Definindo diretorio armazenamento de arquivos provisorios
 const storage = multer.diskStorage({
