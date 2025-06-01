@@ -1,6 +1,7 @@
 import express from 'express';
 import 'reflect-metadata';
 import uploadRoutes from './routes/uploadRoutes';
+import errorHandler from './middlewares/errorHandler';
 import 'dotenv/config';
 
 const app = express();
@@ -11,6 +12,8 @@ app.use(express.json());
 // Configurando rotas
 app.use('/api-move', uploadRoutes);
 
+// Middleware de tratamento de erros
+app.use(errorHandler);
 
 // Inicialização do servidor
 const startServer = async () => {
