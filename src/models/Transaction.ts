@@ -14,6 +14,9 @@ export class Transaction {
     @Column({ type: 'bigint' })
     amount: number;
 
+    @Column({ default: false })
+    suspicious: boolean;
+
     @CreateDateColumn({ name: 'created_at' })
     createdAt: Date;
 }

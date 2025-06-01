@@ -37,6 +37,21 @@ export class TransactionService {
                         return;
                     }
 
+                    // Verificar duplicadas dentro do próprio arquivo
+                    const isDuplicate = transactions.some(t => 
+                        t.from === transaction.from && 
+                        t.to === transaction.to && 
+                        t.amount === transaction.amount
+                    );
+
+                    if (isDuplicate) {
+                        invalidTransactions.push({
+                            data: transaction,
+                            reason: InvalidReason.DUPLICATE_TRANSACTION
+                        });
+                        return;
+                    }
+
                     transactions.push(transaction);
                 })
                 .on('end', async () => {
@@ -53,7 +68,8 @@ export class TransactionService {
                             transaction.from = t.from;
                             transaction.to = t.to;
                             transaction.amount = t.amount;
-                            
+                            // Marcar como suspeita se o valor for superior a 50.000,00 reais (5.000.000 centavos)
+                            transaction.suspicious = t.amount > 5000000;
                             
                             await this.transactionRepository.save(transaction);
                         }
