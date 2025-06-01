@@ -1,11 +1,15 @@
 import express from 'express';
 import 'reflect-metadata';
+import uploadRoutes from './routes/uploadRoutes';
 import 'dotenv/config';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+
+// Configurando rotas
+app.use('/api-move', uploadRoutes);
 
 
 // Inicialização do servidor
