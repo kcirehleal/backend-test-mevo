@@ -1,0 +1,22 @@
+# Dependências
+node_modules/
+
+# Ambiente
+.env
+
+# Diretório de uploads temporários
+uploads/*
+
+# Arquivos de build
+dist/
+
+# Logs
+logs
+*.log
+
+# Arquivos de cobertura de teste
+coverage/
+
+# Arquivos temporários
+.tmp/
+.temp/
