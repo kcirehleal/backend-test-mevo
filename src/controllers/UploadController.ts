@@ -1,7 +1,13 @@
 import { Request, Response } from 'express';
+import { TransactionService } from '../services/TransactionService';
 import fs from 'fs';
 
 export class UploadController {
+  private transactionService: TransactionService;
+
+  constructor() {
+    this.transactionService = new TransactionService();
+  }
 
   async uploadCSV(req: Request, res: Response): Promise<void> {
     
@@ -13,7 +19,7 @@ export class UploadController {
 
       const { path: filePath, originalname } = req.file;
       const result = await this.transactionService.processCSVFile(filePath, originalname);  
-
+          
       try {
         // Limpar o arquivo após o processamento
         fs.unlinkSync(filePath);
